@@ -19,6 +19,10 @@ class DrawerSupplier extends StatefulWidget {
   static List<String> drawers = [];
 
   DrawerSupplier({Key? key}) : super(key: key) {
+    drawerItems.add({
+      "icon": Icons.favorite,
+      "name": "Varanasi Software Junction",
+    });
     for (String str in DrawerSupplier.drawers) {
       drawerItems.add({
         "icon": Icons.favorite,
