@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:vsjconnector/downloader.dart';
 import 'package:vsjconnector/jsonhandler.dart';
-
+import 'databasehandler.dart';
+import 'downloadeddata.dart';
 class DrawerSupplier extends StatefulWidget {
 
   static Future getDrawer() async
   {
-    dynamic retvalue = await Downloader.getDownloadedData("url");
+    try {
+      dynamic retvalue = await Downloader.getDownloadedData("url");
+      print("Downloaded data = " + retvalue.toString());
+      DownloadedData data = DownloadedData(0, retvalue.toString());
+      DatabaseHandler.insertData(data);
+    }
+    catch(ex)
+    {
+      print(ex);
+    }
+  dynamic retvalue= await DatabaseHandler.downloads();
+    print("Sqlite data = " + retvalue.toString());
     retvalue = JsonUtilities.JsonDecoder(retvalue.toString());
+
     retvalue = retvalue["drawer"];
     for (var str in retvalue) {
       DrawerSupplier.drawers.add(str.toString());

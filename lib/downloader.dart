@@ -9,6 +9,6 @@ async {
   if(response.statusCode==200)
   return response.body;
 
-  return "error";
+  throw Exception("Failed");
 }
 }
