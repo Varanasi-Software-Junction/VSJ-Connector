@@ -3,8 +3,11 @@ import 'package:vsjconnector/downloader.dart';
 import 'package:vsjconnector/jsonhandler.dart';
 import 'databasehandler.dart';
 import 'downloadeddata.dart';
+import 'package:network_to_file_image/network_to_file_image.dart';
+import 'package:vsjconnector/cachedimagemanager.dart';
 class DrawerSupplier extends StatefulWidget {
 
+  String drawerimage="https://3.bp.blogspot.com/-py5FbTZgvjo/YDi1bsQq16I/AAAAAAAACB0/BxejbJBcHA4AVfkB33WYC3YlVmxElM7BwCK4BGAYYCw/s1600/Varanasi%2BSoftware%2BJunction%2BPhone%2BLogo.png";
   static Future getDrawer() async
   {
     try {
@@ -67,8 +70,11 @@ class _DrawerSupplier extends State<DrawerSupplier> {
               decoration: const BoxDecoration(
                 color: Colors.teal,
               ),
-              child: Image.network(
-                  'https://3.bp.blogspot.com/-py5FbTZgvjo/YDi1bsQq16I/AAAAAAAACB0/BxejbJBcHA4AVfkB33WYC3YlVmxElM7BwCK4BGAYYCw/s1600/Varanasi%2BSoftware%2BJunction%2BPhone%2BLogo.png'),
+              child: Image(image: NetworkToFileImage(
+
+                url: widget.drawerimage,
+                file: CachedImageManager.fileFromDocsDir( CachedImageManager.getFilePath(widget.drawerimage)),
+              )),
             ),
 
             //********************************
